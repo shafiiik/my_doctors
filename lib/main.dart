@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_doctors/screens/home_screen.dart';
+import 'database/database.dart';
 
-void main() {
+
+
+void main()  {
+
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
