@@ -35,7 +35,9 @@ create table if not exists $tableName (
   id integer primary key autoincrement, 
   name text not null,
   rate REAL,
-   speciality text)
+   speciality text,
+   long REAL,
+   lat REAL)
 ''');
 
         });
@@ -54,7 +56,7 @@ create table if not exists $tableName (
 
     List<Map<String, dynamic>> maps = await database.query(
       tableName,
-      columns: ["name", "rate", "speciality"],
+      columns: ["name", "rate", "speciality","long","lat"],
     );
     print(maps.length);
     if (maps.length > 0) {

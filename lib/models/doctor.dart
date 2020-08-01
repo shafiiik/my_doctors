@@ -14,11 +14,17 @@ class Doctor {
       "name": this.name,
       "rate": this.rate,
       "speciality": this.speciality,
+      "long":this.long,
+      "lat":this.lat,
     };
   }
 
-
   factory Doctor.fromJson(Map<String, dynamic> json) {
-    return Doctor(name: json["name"],rate: json["rate"],speciality: json["speciality"]);
+    return Doctor(
+        name: json["name"],
+        rate: json["rate"],
+        speciality: json["speciality"],
+        long: json["long"],
+        lat: json["lat"]);
   }
 }
