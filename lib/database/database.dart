@@ -56,7 +56,7 @@ create table if not exists $tableName (
 
     List<Map<String, dynamic>> maps = await database.query(
       tableName,
-      columns: ["name", "rate", "speciality","long","lat"],
+      columns: ["id","name", "rate", "speciality","long","lat"],
     );
     print(maps.length);
     if (maps.length > 0) {
@@ -69,4 +69,14 @@ create table if not exists $tableName (
     }
     return null;
   }
+
+  Future<int> delete(int id) async {
+    return await database.delete(tableName, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<int> update(Doctor doctor) async {
+    return await database.update(tableName, doctor.toJson(),
+        where: 'id = ?', whereArgs: [doctor.id]);
+  }
+
 }

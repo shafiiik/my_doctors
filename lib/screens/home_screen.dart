@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("shafik"),
+        title: Text("Doctors"),
       ),
       body: doctors == null
           ? CircularProgressIndicator()
@@ -41,18 +41,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: GestureDetector(
                             onTap: () {
-                              doctors[i].name = "bassem";
-                              setState(() {});
+                              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                return CreateNewDoctor(getTheDoctors: getTheDoctors,doctorToBeUpdated: doctors[i]);
+                              }));
                             },
                             child: Icon(Icons.edit)),
                       ),
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
+                            db.delete(doctors[i].id);
                             doctors.removeAt(i);
                             setState(() {});
                           },
                           child: Icon(
+
                             Icons.delete,
                             color: Colors.red,
                           ),
@@ -65,8 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          //doctors.add(Doctor(name: "bassem", rate: 2.5, speciality: "tez"));
-
           setState(() {});
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return CreateNewDoctor(getTheDoctors: getTheDoctors);
@@ -77,10 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void getTheDoctors() async{
+  void getTheDoctors() async {
     doctors = await db.getDoctors();
-    setState(() {
-
-    });
+    setState(() {});
   }
 }
