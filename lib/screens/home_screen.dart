@@ -30,38 +30,85 @@ class _HomeScreenState extends State<HomeScreen> {
           : ListView.builder(
               itemCount: doctors.length,
               itemBuilder: (context, i) {
-                return ListTile(
-                  isThreeLine: true,
-                  title: Text(doctors[i].name),
-                  subtitle: Text(doctors[i].rate.toString()),
-                  leading: Image.network(
-                      "https://img.freepik.com/free-photo/front-view-doctor-with-medical-mask-posing-with-crossed-arms_23-2148445082.jpg?size=626&ext=jpg"),
-                  trailing: Column(
-                    children: <Widget>[
-                      Expanded(
-                        child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                return CreateNewDoctor(getTheDoctors: getTheDoctors,doctorToBeUpdated: doctors[i]);
-                              }));
-                            },
-                            child: Icon(Icons.edit)),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            db.delete(doctors[i].id);
-                            doctors.removeAt(i);
-                            setState(() {});
-                          },
-                          child: Icon(
-
-                            Icons.delete,
-                            color: Colors.red,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    elevation: 6,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: 100,
+                          height: 100,
+                          child: ClipOval(
+                            child: Image.network(
+                              "https://img.freepik.com/free-photo/front-view-doctor-with-medical-mask-posing-with-crossed-arms_23-2148445082.jpg?size=626&ext=jpg",
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RichText(
+                            text: TextSpan(
+                              style: DefaultTextStyle.of(context).style,
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: "${doctors[i].name} \t",
+                                  style: TextStyle(height: 1, fontSize: 20),
+                                ),
+                                TextSpan(
+                                  text: doctors[i].rate.toString(),
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(.9)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(doctors[i].speciality,style: TextStyle(color: Colors.blue),),
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return CreateNewDoctor(
+                                          getTheDoctors: getTheDoctors,
+                                          doctorToBeUpdated: doctors[i]);
+                                    }));
+                                  },
+                                  child: Icon(Icons.edit)),
+                            ),
+                            Container(
+                              height: 30,
+                              child: VerticalDivider(
+                                width: 4,
+                                color: Colors.deepPurpleAccent,
+                              ),
+                            ),
+                            Expanded(
+                              child: GestureDetector(
+                                onTap: () {
+                                  db.delete(doctors[i].id);
+                                  doctors.removeAt(i);
+                                  setState(() {});
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
