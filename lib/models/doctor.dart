@@ -8,18 +8,17 @@ class Doctor {
   double rate;
   String speciality;
 
-  Doctor({this.id,this.name, this.long, this.lat, this.rate, this.speciality});
+  Doctor({this.id, this.name, this.long, this.lat, this.rate, this.speciality});
 
   Map<String, dynamic> toJson() {
     return {
       "name": this.name,
       "rate": this.rate,
       "speciality": this.speciality,
-      "long":this.long,
-      "lat":this.lat,
+      "long": this.long,
+      "lat": this.lat,
     };
   }
-
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
         id: json["id"],

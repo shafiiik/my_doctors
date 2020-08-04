@@ -40,6 +40,8 @@ class _CreateNewDoctorState extends State<CreateNewDoctor> {
 
   @override
   Widget build(BuildContext context) {
+    final double shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
     return Scaffold(
       appBar: AppBar(
         title: Text("Add & Update Doctor"),
